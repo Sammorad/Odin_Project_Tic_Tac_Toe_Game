@@ -1,0 +1,10 @@
+.container{
+    display: flex;
+    align-content: space-between;
+    width: 85%;
+
+    
+}
+.one, .two, .start{
+    width: 33.33%;
+}
