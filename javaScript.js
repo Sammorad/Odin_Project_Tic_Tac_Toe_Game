@@ -28,61 +28,83 @@ function userArray(name, marker){
 
 const player1 = userArray("Ayo", "X")
 const player2 = userArray("Deji", "O")
-console.log(array)
+let board = gameBoard()
+
 
 
 function gaming(board){
-    //logic for winning the game
+    //logic to check the winning team 
+    let result;
+    
     if ((board[0] === board[1]) && (board[1] ===board[2]) && board[0] !== ""){
-        return "win"
+        result = "win"
     }
     else if ((board[3] ===board[4]) && (board[4] === board[5]) && board[3] !== ""){
-        return "win"
+        result = "win"
     }
     else if ((board[6] === board[7]) && (board[7]===board[8]) && board[6] !== ""){
-        return "win"
+        result ="win"
     }
     else if((board[0] ===board[3]) && (board[3] === board[6]) && board[0] !== ""){
-        return "win"
+        result ="win"
     }
     else if ((board[1] === board[4])&&(board[4] ===board[7]) && board[1] !== ""){
-        return "win"
+        result ="win"
     }
     else if ((board[2] === board[5]) && (board[5] === board[8]) && board[2] !== ""){
-        return "win"
+        result ="win"
     }
     else if ((board[0] === board[4])&&(board[4] === board [8]) && board[0] !== ""){
-        return "win"
+        result ="win"
     }
     else if ((board[2] === board[4]) && (board[4] ===board[6]) && board[2] !== ""){
-        return "win"
+        result ="win"
     }
-    else {
-        return "draw"
-    }
+    return result 
 }
+
 function playGame(){
     //we play the game here 
     
     const board = gameBoard()
-    let game = gaming(board)
-    while (game != "draw"){
-        let firstPlayer = Number(prompt("ply 1 : select the slot between 0 and 8:"))
-        board[firstPlayer] = array[0].marker
-        alert(gaming(board)) 
-        let secondPlayer = Number(prompt("ply 2: select the slot between 0 and 8:"))
-        board[secondPlayer] = array[1].marker
-        alert(gaming(board))
-        console.log(array)
-
+    let game;
+    let moveCount = 0
+    while (moveCount < 9){
         
+        let firstPlayer = Number(prompt("ply 1 : select the slot between 0 and 8:"))
+        if (board[firstPlayer] !== ""){
+            alert("field selected")
+        }
+        else{
+            board[firstPlayer] = array[0].marker
+            game = gaming(board)
+            if (game === "win"){
+                return "Player 1 wins!"
+            }
+            moveCount++
+        }
+
+        if (moveCount === 9) break // to exit if board is full 
+        
+        let secondPlayer = Number(prompt("ply 2: select the slot between 0 and 8:"))
+        if (board[secondPlayer] !== ""){
+            alert("field selected")
+        }
+        else{
+            board[secondPlayer] = array[1].marker
+            game = gaming(board)
+            if (game === "win"){
+                return "Player 2 wins!"
+            }
+            moveCount++
+        }
     }
 
-    
-
+    return "Its a draw!"
 }
 
-playGame()
+alert(playGame())
+console.log(array)
 
 
 
