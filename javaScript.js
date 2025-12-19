@@ -28,12 +28,12 @@ function userArray(name, marker){
     return array
 }
 
-const player1 = userArray("Ayo", "X")
-const player2 = userArray("Deji", "O")
-let board = gameBoard()
-let currentPlayer = array[0]
+const player1 = userArray("Player One", "X");
+const player2 = userArray("Player Two", "O");
+let board = gameBoard();
+let currentPlayer = array[0];
 let moveCount = 0;
-const  start = document.querySelector(".start")
+const  start = document.querySelector(".start");
 const gameGrid = document.querySelector(".gameGrid");
 
 

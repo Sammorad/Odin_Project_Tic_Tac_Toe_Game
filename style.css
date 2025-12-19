@@ -1,7 +1,11 @@
+
+body{
+    width: 85%;
+}
 .container{
     display: flex;
     align-content: space-between;
-    width: 85%;
+    
 
     
 }
@@ -21,4 +25,9 @@
     border: 2px solid black;
     
     
+}
+
+h1{
+    justify-self: center;
+    background-color: brown;
 }
