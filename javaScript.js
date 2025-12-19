@@ -11,6 +11,8 @@ function gameBoard(){
 }
 
 
+
+
 let array = []
 function Users(name, marker){
     //function to create users for the game
@@ -29,6 +31,11 @@ function userArray(name, marker){
 const player1 = userArray("Ayo", "X")
 const player2 = userArray("Deji", "O")
 let board = gameBoard()
+let currentPlayer = array[0]
+let moveCount = 0;
+const  start = document.querySelector(".start")
+const gameGrid = document.querySelector(".gameGrid");
+
 
 
 
@@ -60,51 +67,88 @@ function gaming(board){
     else if ((board[2] === board[4]) && (board[4] ===board[6]) && board[2] !== ""){
         result ="win"
     }
+    
     return result 
 }
 
-function playGame(){
-    //we play the game here 
+function gameGridDiv(gameGrid){
+    //create 9 divs inside the game grid 
     
-    const board = gameBoard()
-    let game;
-    let moveCount = 0
-    while (moveCount < 9){
-        
-        let firstPlayer = Number(prompt("ply 1 : select the slot between 0 and 8:"))
-        if (board[firstPlayer] !== ""){
-            alert("field selected")
-        }
-        else{
-            board[firstPlayer] = array[0].marker
-            game = gaming(board)
-            if (game === "win"){
-                return "Player 1 wins!"
+    for (let i = 0; i < 9; i++){
+    
+       let div = document.createElement("div")
+        div.classList.add("gameGridDivs")
+        div.addEventListener("click", ()=>{
+            if (board[i] !== ""){
+                //check if slot is empty
+                alert("slot taken")
+                return
             }
-            moveCount++
-        }
+            
+            if (currentPlayer === array[0]){
+                //check if its player 1 and assign "x" on the dash board and array//
+                board[i] = array[0].marker;
+                div.innerText = array[0].marker
+                moveCount ++
+                let result = gaming(board)
+                if (result === "win"){
+                    alert(currentPlayer.name + " wins!")
+                }
+                else if (moveCount ===9){
+                    //checks if the number of play is up to 9
+                    alert ("it's a draw")
+                }
+                currentPlayer = array[1]
+                
+                
+            }
+            else{
+                board[i] = array[1].marker
+                div.innerText = array[1].marker
+                moveCount++
+                let result = gaming(board)
+                if (result === "win"){
+                    alert(currentPlayer.name + "wins!")
+                }
+                else if (moveCount === 9){
+                    alert("Its a draw")
+                }
+                currentPlayer = array[0]
+                
 
-        if (moveCount === 9) break // to exit if board is full 
-        
-        let secondPlayer = Number(prompt("ply 2: select the slot between 0 and 8:"))
-        if (board[secondPlayer] !== ""){
-            alert("field selected")
-        }
-        else{
-            board[secondPlayer] = array[1].marker
-            game = gaming(board)
-            if (game === "win"){
-                return "Player 2 wins!"
+                
             }
-            moveCount++
-        }
+            
+
+                
+            
+            
+
+            })
+            
+       gameGrid.appendChild(div)
+       
     }
-
-    return "Its a draw!"
+    return gameGrid
 }
 
-alert(playGame())
-console.log(array)
+
+start.addEventListener("click",() =>{
+    gameGrid.innerHTML = ""//first remove all divs//
+    board = gameBoard()
+    moveCount = 0;
+    currentPlayer = array[0];
+    gameGridDiv(gameGrid)
+        
+    } 
+ 
+    
+)
+
+
+
+
+
 
 
 

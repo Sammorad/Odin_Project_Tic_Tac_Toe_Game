@@ -8,3 +8,17 @@
 .one, .two, .start{
     width: 33.33%;
 }
+.gameGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+   
+    width: 50%;
+    justify-self: center;
+}
+
+.gameGridDivs{
+    border: 2px solid black;
+    
+    
+}
